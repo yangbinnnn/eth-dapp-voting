@@ -89,7 +89,7 @@ resp:
 
 ## 测试环境搭建
 1. 安装nodejs
-2. 安装开发工具，npm install ganache-cli web3@0.20.2
+2. 安装开发工具，npm install ganache-cli web3@0.20.2 solc
 3. 创建并运行开发测试节点，./node_modules/.bin/ganache-cli
 4. 编译部署合约
 ```
