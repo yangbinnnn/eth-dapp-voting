@@ -2,7 +2,7 @@
 
 Ethereum dapp study
 
-# 基本开发
+# 基本开发 voting-v3
 1. 使用`ganache-cli` 快速搭建本地开发测试环境
 2. 手动编译并部署合约
 
@@ -112,7 +112,7 @@ resp:
 }
 ```
 
-# 进阶开发
+# 进阶开发 voting-v2
 1. 使用ethereum `geth`或`mist` 搭建公共测试环境`rinkeby`
 2. 使用`Truffle` 开发框架
 
@@ -124,6 +124,10 @@ resp:
 5. 安装`webpack` 打包依赖，`npm install --save web3@0.20.2 jquery@3.1.1`
 
 ## 部署
+启动geth
+```
+./geth --rinkeby --cache 1024 --rpc --rpcapi db,eth,net,web3,personal --rpcport 8545 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --syncmode light
+```
 
 连接节点
 ```
@@ -186,10 +190,15 @@ truffle(development)> Voting.address
 ## 总结
 1. 往合约地址发送交易可以调用合约函数
 2. 本地开发可以使用ganache-cli 在内存中快速创建ethereum 模拟环境
-3. 参考https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-1-40d2d0d807c2
-4. 与合约交互，必须要知道合约地址和合约ABI（或源码) https://ethereum.stackexchange.com/questions/15603/web3-js-get-contract-abi-knowing-only-contract-address
+4. 与合约交互，必须要知道合约地址和合约ABI（或源码) 
+
+## 参考连接
+- https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-1-40d2d0d807c2
+- https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-2-30b3d335aa1f
+- https://ethereum.stackexchange.com/questions/15603/web3-js-get-contract-abi-knowing-only-contract-address
 
 
 # 问题
+0. DAPP 如何保存在链上?
 1. DAPP 如何执行?
 2. DAPP 产生的数据如何存储？
