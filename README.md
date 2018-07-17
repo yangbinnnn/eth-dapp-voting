@@ -118,8 +118,8 @@ resp:
 
 ## 测试环境搭建
 1. 完成`基本开发`测试环境搭建
-2. 安装`geth`或`mist`，当前使用[mist](https://github.com/ethereum/mist/releases)
-3. 切换到`rinkeby test network`，访问https://www.rinkeby.io/#faucet 获取`ether`
+2. 安装`geth`，可选安装[mist](https://github.com/ethereum/mist/releases) 用于查询块信息等
+3. 切换到`rinkeby test network`，访问https://www.rinkeby.io/#faucet 或http://faucet.ropsten.be:3001/获取`ether`
 4. 安装`Truffle` 开发框架，`npm install -g truffle webpack`
 5. 安装`webpack` 打包依赖，`npm install --save web3@0.20.2 jquery@3.1.1`
 
