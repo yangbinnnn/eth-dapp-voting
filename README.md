@@ -2,7 +2,32 @@
 
 Ethereum dapp study
 
-# Vote 流程
+# 基本开发
+1. 使用`ganache-cli` 快速搭建本地开发测试环境
+2. 手动编译并部署合约
+
+## 测试环境搭建
+1. 安装nodejs
+2. 安装开发工具，npm install ganache-cli web3@0.20.2 solc
+3. 创建并运行开发测试节点，./node_modules/.bin/ganache-cli
+4. 编译部署合约
+```
+Web3 = require('web3')
+# 连接测试节点
+var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
+# 编译合约
+var code = fs.readFileSync('volting.sol').toString()
+var solc = require('solc')
+compliedCode = solc.compile(code)
+abiDefifnition = JSON.parse(compliedCode.contracts[':Voting'].interface)
+# 初始化部署合约
+VotingContract = web3.eth.contract(abiDefifnition)
+deployedContract = VotingContract.new(['Rama', 'Nick', 'Jose'], {data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
+# 获取合约地址, 部署完成
+deployedContract.address
+```
+
+## Vote 流程
 1. `eth_accounts` 获取当前账号列表，取第一个用户交易
 
 req:
@@ -87,28 +112,23 @@ resp:
 }
 ```
 
+# 进阶开发
+1. 使用ethereum `geth`或`mist` 搭建公共测试环境`rinkeby`
+2. 使用`Truffle` 开发框架
+
 ## 测试环境搭建
-1. 安装nodejs
-2. 安装开发工具，npm install ganache-cli web3@0.20.2 solc
-3. 创建并运行开发测试节点，./node_modules/.bin/ganache-cli
-4. 编译部署合约
-```
-Web3 = require('web3')
-# 连接测试节点
-var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
-# 编译合约
-var code = fs.readFileSync('volting.sol').toString()
-var solc = require('solc')
-compliedCode = solc.compile(code)
-abiDefifnition = JSON.parse(compliedCode.contracts[':Voting'].interface)
-# 初始化部署合约
-VotingContract = web3.eth.contract(abiDefifnition)
-deployedContract = VotingContract.new(['Rama', 'Nick', 'Jose'], {data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
-# 获取合约地址, 部署完成
-deployedContract.address
-```
+1. 完成`基本开发`测试环境搭建
+2. 安装`geth`或`mist`，当前使用[mist](https://github.com/ethereum/mist/releases)
+3. 切换到`rinkeby test network`，访问https://www.rinkeby.io/#faucet 获取`ether`
+4. 安装`Truffle` 开发框架，`npm install -g truffle webpack`
+5. 安装`webpack` 打包依赖，`npm install --save web3@0.20.2 jquery@3.1.1`
 
 ## 总结
 1. 往合约地址发送交易可以调用合约函数
 2. 本地开发可以使用ganache-cli 在内存中快速创建ethereum 模拟环境
 3. 参考https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-1-40d2d0d807c2
+
+
+# 问题
+1. DAPP 如何执行?
+2. DAPP 产生的数据如何存储？
