@@ -2,7 +2,7 @@
 
 Ethereum dapp study
 
-# 基本开发 voting-v3
+# 基本开发 voting-v1
 1. 使用`ganache-cli` 快速搭建本地开发测试环境
 2. 手动编译并部署合约
 
