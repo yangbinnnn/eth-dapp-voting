@@ -123,10 +123,71 @@ resp:
 4. 安装`Truffle` 开发框架，`npm install -g truffle webpack`
 5. 安装`webpack` 打包依赖，`npm install --save web3@0.20.2 jquery@3.1.1`
 
+## 部署
+
+连接节点
+```
+truffle console
+```
+
+查看账号
+```
+truffle(development)> web3.personal.listAccounts
+[ '0xa1b4d5209ce8f1ea769778d0e325bff206200ee9' ]
+```
+
+解锁账号
+```
+truffle(development)> account = web3.personal.listAccounts[0]
+'0xa1b4d5209ce8f1ea769778d0e325bff206200ee9'
+truffle(development)> web3.personal.unlockAccount(account, '123456', 15000)
+true
+```
+
+部署
+部署完成后Voting 合约地址为`0x40176ee3f81c4fbff793dc0c2f532c44dff1cea0`
+```
+$ truffle migrate
+Using network 'development'.
+
+Running migration: 1_initial_migration.js
+  Deploying Migrations...
+  ... 0x700e705d8a0db82b699987c8f74825b8f09dde83e5ea8c49c6b148ff2f7ec335
+  Migrations: 0x241685f86c892865154153c0fadf9a7a110ba15f
+Saving successful migration to network...
+  ... 0xa31f614f4e83fb20bb1418dac6c6fd78174e761b9533749223504d21f698bab7
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying Voting...
+  ... 0xd88e1026330f4197afd11a8e3087b26fcfe21cbc04c8b55c8e809595838b88c9
+  Voting: 0x40176ee3f81c4fbff793dc0c2f532c44dff1cea0
+Saving successful migration to network...
+  ... 0x59c3acedaad929ba092caf6894d78aa738dfbc0178c8e8123dc9c9220fd85a4d
+Saving artifacts...
+```
+
+相关geth 日志
+```
+INFO [07-17|14:27:49] Submitted contract creation              fullhash=0x700e705d8a0db82b699987c8f74825b8f09dde83e5ea8c49c6b148ff2f7ec335 contract=0x241685F86c892865154153c0FaDf9a7a110bA15f
+INFO [07-17|14:28:24] Submitted transaction                    fullhash=0xa31f614f4e83fb20bb1418dac6c6fd78174e761b9533749223504d21f698bab7 recipient=0x241685F86c892865154153c0FaDf9a7a110bA15f
+INFO [07-17|14:28:54] Submitted contract creation              fullhash=0xd88e1026330f4197afd11a8e3087b26fcfe21cbc04c8b55c8e809595838b88c9 contract=0x40176Ee3f81c4fBFF793DC0C2f532C44Dff1Cea0
+INFO [07-17|14:29:39] Submitted transaction                    fullhash=0x59c3acedaad929ba092caf6894d78aa738dfbc0178c8e8123dc9c9220fd85a4d recipient=0x241685F86c892865154153c0FaDf9a7a110bA15f
+```
+
+查看合约信息
+```
+truffle console
+Voting.address
+truffle(development)> Voting.address
+'0x40176ee3f81c4fbff793dc0c2f532c44dff1cea0'
+```
+![contract.png](./contract.png)
+
 ## 总结
 1. 往合约地址发送交易可以调用合约函数
 2. 本地开发可以使用ganache-cli 在内存中快速创建ethereum 模拟环境
 3. 参考https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-1-40d2d0d807c2
+4. 与合约交互，必须要知道合约地址和合约ABI（或源码) https://ethereum.stackexchange.com/questions/15603/web3-js-get-contract-abi-knowing-only-contract-address
 
 
 # 问题
